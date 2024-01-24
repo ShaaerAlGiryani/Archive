@@ -1,0 +1,15 @@
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\bin\Debug\ArchiveSystem.exe.config
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\bin\Debug\ArchiveSystem.exe
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\bin\Debug\ArchiveSystem.pdb
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Properties.Resources.resources
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.csproj.GenerateResource.cache
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.exe
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.pdb
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmAdmin.resources
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmChangePassword.resources
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmLogin.resources
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmResetCon.resources
+C:\Users\HP\Desktop\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmMain.resources
