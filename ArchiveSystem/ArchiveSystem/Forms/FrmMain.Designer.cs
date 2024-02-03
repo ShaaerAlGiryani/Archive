@@ -157,6 +157,7 @@
             this.btnChangePass.Text = "تغيير كلمة المرور";
             this.btnChangePass.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnChangePass.UseVisualStyleBackColor = true;
+            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
             // 
             // btnReports
             // 
@@ -175,7 +176,6 @@
             this.btnReports.Text = "التقارير";
             this.btnReports.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnReports.UseVisualStyleBackColor = true;
-            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // btnSetings
             // 
@@ -212,6 +212,7 @@
             this.btnUsers.Text = "إدارة بيانات المستخدمين";
             this.btnUsers.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnUsers.UseVisualStyleBackColor = true;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnOutter
             // 
@@ -230,6 +231,7 @@
             this.btnOutter.Text = "ارشفة البريد الصادر";
             this.btnOutter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOutter.UseVisualStyleBackColor = true;
+            this.btnOutter.Click += new System.EventHandler(this.btnOutter_Click);
             // 
             // btnInner
             // 

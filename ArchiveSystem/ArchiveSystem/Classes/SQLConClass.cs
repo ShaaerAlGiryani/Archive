@@ -43,5 +43,46 @@ namespace ArchiveSystem.Classes
             }
             return ds;
         }
+        public DataSet cmdExecuteData(string command, SqlParameter[] parameters)
+        {
+            SqlDataAdapter da;
+            var ds = new DataSet();
+            var cmd = new SqlCommand(command, con);
+            VariablesClass.Save = -1;
+
+            if (!(parameters == null))
+            {
+                foreach (SqlParameter p in parameters)
+                    if (p.Value == null) p.Value = DBNull.Value;
+
+                cmd.Parameters.AddRange(parameters);
+            }
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@saveState", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            try
+            {
+                con.Open();
+                da = new SqlDataAdapter(cmd);
+                da.Fill(ds);                  
+                con.Close();
+
+                VariablesClass.Save = Convert.ToInt32(cmd.Parameters["@saveState"].Value.ToString());
+            }
+
+            catch (Exception ex)
+            {
+                con.Close();
+                MessageBox.Show("فشل في الإتصال بقاعدة البيانات" + Environment.NewLine + ex.Message, "خطأ إتصال", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+            return ds;
+
+        }
+
     }
 }
+    
+

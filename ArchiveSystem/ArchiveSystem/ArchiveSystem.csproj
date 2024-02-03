@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="Classes\ConClass.cs" />
     <Compile Include="Classes\FunctionsClass.cs" />
+    <Compile Include="Classes\ResizeControls.cs" />
     <Compile Include="Classes\SQLConClass.cs" />
+    <Compile Include="Classes\UserClass.cs" />
     <Compile Include="Classes\VariablesClass.cs" />
     <Compile Include="Forms\FrmAdmin.cs">
       <SubType>Form</SubType>
@@ -80,6 +82,24 @@
     <Compile Include="Forms\FrmResetCon.designer.cs">
       <DependentUpon>FrmResetCon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOutter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOutter.Designer.cs">
+      <DependentUpon>FrmOutter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmUsers.designer.cs">
+      <DependentUpon>FrmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\userform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\userform.Designer.cs">
+      <DependentUpon>userform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FrmAdmin.resx">
@@ -96,6 +116,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmResetCon.resx">
       <DependentUpon>FrmResetCon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOutter.resx">
+      <DependentUpon>FrmOutter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmUsers.resx">
+      <DependentUpon>FrmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\userform.resx">
+      <DependentUpon>userform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

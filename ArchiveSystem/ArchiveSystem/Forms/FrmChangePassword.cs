@@ -18,7 +18,8 @@ namespace ArchiveSystem.Forms
         {
             InitializeComponent();
         }
-        DataSet dsChangePass = new DataSet();
+        
+        UserClass user = new UserClass();  
         private void FrmChangePassword_Load(object sender, EventArgs e)
         {
             txtUserName.Text = VariablesClass.userName;
@@ -40,20 +41,10 @@ namespace ArchiveSystem.Forms
                 txtNewPass.Focus();
                 return;
             }
-            changePass();
-        }
-
-        void changePass()
-        {
-            SQLConClass sqlcon = new SQLConClass();
-            ConClass.sqlQuery = "UPDATE TblUsers SET UserPass='" + txtNewPass.Text + "' WHERE Id=" + VariablesClass.userId;
-            dsChangePass = sqlcon.selectData(ConClass.sqlQuery, 0, default);
-
-            MessageBox.Show("تم تغير كلمة المرور بنجاح", "تغير كلمة المرور", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            VariablesClass.userPassword = txtNewPass.Text;
+            user.userPassword = txtNewPass.Text;
+            user.changePass(user);
             this.Close();
         }
-
         private void chkShowPass_CheckedChanged(object sender, EventArgs e)
         {
             if (chkShowPass.Checked == true)

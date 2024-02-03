@@ -10,5 +10,7 @@ namespace ArchiveSystem.Classes
     {
         public static string userName, userPassword, userJob, phoneNum;
         public static int userId;
+        public static int Save = -1;
+
     }
 }
