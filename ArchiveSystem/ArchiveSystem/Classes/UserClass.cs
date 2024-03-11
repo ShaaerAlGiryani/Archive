@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace ArchiveSystem.Classes
 {
-    internal class UserClass
+    class UserClass
     {
         public int userId { get; set; }
         public string userName { get; set; }
@@ -24,6 +24,14 @@ namespace ArchiveSystem.Classes
         DataSet ds = new DataSet();
         DataSet dsChangePass = new DataSet();
         //insert user
+        public void setusername(string username)
+        {
+            userName = username;
+        }
+        public string getusername()
+        {
+            return userName;
+        }
         public void insertUser(UserClass user)
         {
                 var sqlCon = new SQLConClass();

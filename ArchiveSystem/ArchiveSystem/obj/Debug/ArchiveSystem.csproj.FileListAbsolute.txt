@@ -30,4 +30,4 @@ C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.exe
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.pdb
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmUsers.resources
-C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.userform.resources
+C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmContacts.resources

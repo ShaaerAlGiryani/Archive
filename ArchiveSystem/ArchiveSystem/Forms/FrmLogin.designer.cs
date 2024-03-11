@@ -42,6 +42,7 @@ namespace ArchiveSystem.Forms
             this.btnExit = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -121,6 +122,7 @@ namespace ArchiveSystem.Forms
             this.cmbUserName.SelectedIndexChanged += new System.EventHandler(this.cmbUserName_SelectedIndexChanged);
             this.cmbUserName.SelectionChangeCommitted += new System.EventHandler(this.cmbUserName_SelectionChangeCommitted);
             this.cmbUserName.TextChanged += new System.EventHandler(this.cmbUserName_TextChanged);
+            this.cmbUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyDown);
             // 
             // label5
             // 
@@ -218,6 +220,11 @@ namespace ArchiveSystem.Forms
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FrmLogin
             // 
             this.AcceptButton = this.btnOK;
@@ -258,5 +265,6 @@ namespace ArchiveSystem.Forms
         internal System.Windows.Forms.Label lblTimerCount;
         internal System.Windows.Forms.Timer timer2;
         internal System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Timer timer1;
     }
 }

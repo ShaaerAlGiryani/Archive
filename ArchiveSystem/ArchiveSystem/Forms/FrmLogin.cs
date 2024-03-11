@@ -15,8 +15,7 @@ namespace ArchiveSystem.Forms
 {
     public partial class FrmLogin : Form
     {
-        bool swClose;
-        DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
         int timerCount;
         public FrmLogin()
         {
@@ -25,24 +24,33 @@ namespace ArchiveSystem.Forms
        
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-            SQLConClass sQLCon = new SQLConClass();
-            SQLConClass.sqlQuery = "SELECT * FROM TblUsers";
-            ds = sQLCon.selectData(SQLConClass.sqlQuery, 0, default);
-            if (ds.Tables.Count > 0)
+            try
             {
-                cmbUserName.DataSource = ds.Tables[0];
+                ConClass.sqlQuery = "SELECT * FROM TblUsers";
+                ConClass.da = new SqlDataAdapter(ConClass.sqlQuery, ConClass.con);
+                dt = new DataTable();
+                ConClass.da.Fill(dt);
+
+                cmbUserName.DataSource = dt;
                 cmbUserName.DisplayMember = "userName";
                 cmbUserName.ValueMember = "Id";
 
+                txtPassword.Select();
                 cmbUserName.SelectedValue = Settings.Default.SelectedUser;
                 cmbUserName_SelectionChangeCommitted(sender, e);
-                txtPassword.Select();
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show("فشل في الإتصال بقاعدة البيانات" +
+                    Environment.NewLine + ex.Message, "خطأ إتصال", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 FrmAdmin frmAdmin = new FrmAdmin();
                 frmAdmin.ShowDialog();
             }
+
+            this.Top = -this.Height;
+            timer1.Enabled = true;
+            txtPassword.Select();
 
         }
         private void btnExit_Click(object sender, EventArgs e)
@@ -53,77 +61,96 @@ namespace ArchiveSystem.Forms
         {
             if (cmbUserName.Text.Trim() == "")
             {
-                MessageBox.Show("يرجى ادخال اسم المستخدم", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("يرجى ادخال اسم المستخدم", "خطأ في الدخول", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 cmbUserName.Focus();
                 return;
             }
-            if (txtPassword.Text.Trim() == "")
+            if (txtPassword.Text == "")
             {
-                MessageBox.Show("يرجى ادخال كلمة المرور", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("يرجى ادخال كلمة المرور", "خطأ في الدخول", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtPassword.Focus();
                 return;
             }
 
-            DataRow[] itemRows = ds.Tables[0].Select("userName='" + cmbUserName.Text + "'");
-            if (itemRows.Length > 0)
+            for (int i = 0; i <= dt.Rows.Count - 1; i++)
             {
-                if (txtPassword.Text == itemRows[0][2].ToString())
+                if (cmbUserName.Text.Trim() == dt.Rows[i][1].ToString())
                 {
-                    if (txtPassword.Text == "0000")
+                    if (txtPassword.Text == dt.Rows[i][2].ToString())
                     {
-                        MessageBox.Show("يرجى تغيير كلمة المرور الإفتراضية");
-                        FrmChangePassword frmChangePassword = new FrmChangePassword();
-                        frmChangePassword.ShowDialog();
-                        if (VariablesClass.userPassword == "0000")
+
+                        VariablesClass.userId = (int)dt.Rows[i][0];
+                        VariablesClass.userName = Convert.ToString(dt.Rows[i][1]);
+                        VariablesClass.userPassword = dt.Rows[i][2].ToString();
+                        VariablesClass.userJob = (string)dt.Rows[i][3];
+
+                        VariablesClass.updatePermission = (bool)dt.Rows[i][5];
+                        VariablesClass.insertPermission = (bool)dt.Rows[i][6];
+                        VariablesClass.printPermission = (bool)dt.Rows[i][7];
+                        VariablesClass.usersPermission = (bool)dt.Rows[i][8];
+                        VariablesClass.settingsPermission = Convert.ToBoolean(dt.Rows[i][9]);
+
+                        if (txtPassword.Text == "0000")
                         {
-                            MessageBox.Show("لم يتم تغيير كلمة المرور الافتراضية، سيتم اغلاق النظام", "رفض الدخول", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            Environment.Exit(0);
+                            MessageBox.Show("يرجى تغيير كلمة المرور الإفتراضية");
+                            FrmChangePassword frmChangePassword = new FrmChangePassword();
+                            frmChangePassword.ShowDialog();
+                            if (VariablesClass.userPassword == "0000")
+                            {
+                                MessageBox.Show("لم يتم تغيير كلمة المرور الافتراضية، سيتم اغلاق النظام", "رفض الدخول", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                Environment.Exit(0);
+                            }
+                        }
+
+                        this.Hide();
+                        FrmMain frmMain = new FrmMain();
+                        frmMain.Show();
+                        return;
+                    }
+                    else
+                    {
+                        Settings.Default.ErrorLoginCount++;
+                        Settings.Default.Save();
+                        if (Settings.Default.ErrorLoginCount < 3)
+                        {
+                            MessageBox.Show("كلمة المرور غير صحيحة لقد استنفذت " + Settings.Default.ErrorLoginCount + " من 3 محاولات", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtPassword.Clear();
+                            txtPassword.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("لقد استنفذت جميع المحاولات", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            timerCount = 30;
+                            btnOK.Text = timerCount.ToString();
+                            this.Enabled = false;
+                            timer2.Enabled = true;
+                            return;
                         }
                     }
-                    else
-                    {
-                        FrmMain frmMain = new FrmMain();
-                        frmMain.ShowDialog();
-                    }
-
-                    swClose = true;
-                    Settings.Default.ErrorLoginCount = 0;
-                    this.Close();
-                }
-                else
-                {
-                    Settings.Default.ErrorLoginCount++;
-                    Settings.Default.Save();
-                    if (Settings.Default.ErrorLoginCount < 3)
-                    {
-                        MessageBox.Show("كلمة المرور غير صحيحة لقد استنفذت " + Settings.Default.ErrorLoginCount + " من 3 محاولات", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtPassword.Clear();
-                        txtPassword.Focus();
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("لقد استنفذت جميع المحاولات", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        timerCount = 30;
-                        lblTimerCount.Text = timerCount.ToString();
-                        lblTimerCount.Visible = true;
-                        this.Enabled = false;
-                        timer2.Enabled = true;
-                        return;
-                    }
                 }
             }
-            else
-            {
-                MessageBox.Show("اسم المستخدم غير مسجل في المنظومة", "خطأ ادخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                cmbUserName.SelectAll();
-                cmbUserName.Focus();
-            }
+            MessageBox.Show("اسم المستخدم غير مسجل في المنظومة", "خطأ في الدخول", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            cmbUserName.SelectAll();
+            cmbUserName.Focus();
         }
         private void cmbUserName_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtPassword.Clear();
             txtPassword.Focus();
+            int cr = cmbUserName.SelectedIndex;
+            if (cr == -1)
+                return;
+
+            if (dt.Rows[cr][4] is DBNull == false)
+            {
+                byte[] img = (byte[])dt.Rows[cr][4];
+                var ms = new MemoryStream(img);
+                picUser.Image = Image.FromStream(ms);
+
+            }
+            else
+                picUser.Image = Resources.user;
         }
         private void cmbUserName_TextChanged(object sender, EventArgs e)
         {
@@ -136,45 +163,25 @@ namespace ArchiveSystem.Forms
         }
         private void cmbUserName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (cmbUserName.SelectedValue == null)
+            if (cmbUserName.SelectedValue == null)  
             {
                 lblUser.Text = "";
                 return;
             }
+            lblUser.Text = "رقم التسجيل  " + cmbUserName.SelectedValue;
 
-            lblUser.Text = "رقم التسجيل >> " + cmbUserName.SelectedValue;
+            
             Settings.Default.SelectedUser = Convert.ToInt32(cmbUserName.SelectedValue);
             Settings.Default.Save();
-
-
-            DataRow[] itemRows = ds.Tables[0].Select("Id=" + cmbUserName.SelectedValue); // Dim itemRows() As DataRow = ds.Tables[0].Select("Id=" & cmbUserName.SelectedValue & " AND UserPIC IS NOT NULL")
-            if (itemRows.Length > 0)
-            {
-
-                //if (!(itemRows[0][6] is DBNull))
-                //{
-                //    picUser.Image = FunctionsClass.byteToImage((byte[])itemRows[0][6]);
-                //    frmMain.picUser.Image = FunctionsClass.byteToImage((byte[])itemRows[0][6]);
-                //}
-                //else
-                //{
-                //    picUser.Image = Resources.user;
-                //    frmMain.picUser.Image = Resources.user;
-                //}
-
-                VariablesClass.userId = (int)itemRows[0][0];
-                VariablesClass.userName = itemRows[0][1].ToString();
-                VariablesClass.userPassword = itemRows[0][2].ToString();
-                VariablesClass.userJob = itemRows[0][3].ToString();
-            }
         }
+     
         private void txtPassword_Enter(object sender, EventArgs e)
         {
             cmbUserName_SelectionChangeCommitted(sender, e);
         }
         private void FrmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (swClose == false)
+            
                 Environment.Exit(0);
         }
 
@@ -191,6 +198,23 @@ namespace ArchiveSystem.Forms
                 txtPassword.Focus();
                 Settings.Default.ErrorLoginCount = 0;
                 Settings.Default.Save();
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Top = this.Top + 30;
+            if (this.Top > (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2)
+            {
+                timer1.Enabled = false;
+            }
+        }
+
+        private void cmbUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                cmbUserName_SelectionChangeCommitted(sender, e);
             }
         }
     }

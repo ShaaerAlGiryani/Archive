@@ -118,5 +118,17 @@ namespace ArchiveSystem.Properties {
                 this["ErrorLoginCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\sqll")]
+        public string DiskArchivePath {
+            get {
+                return ((string)(this["DiskArchivePath"]));
+            }
+            set {
+                this["DiskArchivePath"] = value;
+            }
+        }
     }
 }

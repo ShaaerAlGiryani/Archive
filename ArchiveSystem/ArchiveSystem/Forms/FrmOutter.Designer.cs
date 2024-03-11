@@ -45,15 +45,16 @@
             this.SendDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RegDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.picContact = new System.Windows.Forms.PictureBox();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.btnSearchRefresh = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFileExtension = new System.Windows.Forms.Label();
+            this.picFileIcon = new System.Windows.Forms.PictureBox();
             this.btnFileCancel = new System.Windows.Forms.Button();
             this.btnFileShow = new System.Windows.Forms.Button();
             this.btnFileSave = new System.Windows.Forms.Button();
@@ -85,24 +86,19 @@
             this.txtNum = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.picFileIcon = new System.Windows.Forms.PictureBox();
-            this.picContact = new System.Windows.Forms.PictureBox();
-            this.picRefresh = new System.Windows.Forms.PictureBox();
-            this.picDelete = new System.Windows.Forms.PictureBox();
-            this.picAdd = new System.Windows.Forms.PictureBox();
-            this.picUpdate = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddd = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picContact)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFileIcon)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.grpInfo.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picFileIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picContact)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picUpdate)).BeginInit();
             this.SuspendLayout();
             // 
             // tssLblDateTime
@@ -139,7 +135,6 @@
             this.SendDate,
             this.RegDate,
             this.column11,
-            this.column6,
             this.UserName});
             this.dgvOutter.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -175,6 +170,9 @@
             this.dgvOutter.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOutter.Size = new System.Drawing.Size(1073, 212);
             this.dgvOutter.TabIndex = 968;
+            this.dgvOutter.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOutter_ColumnHeaderMouseClick);
+            this.dgvOutter.Sorted += new System.EventHandler(this.dgvOutter_Sorted);
+            this.dgvOutter.Click += new System.EventHandler(this.dgvOutter_Click);
             // 
             // column7
             // 
@@ -236,14 +234,6 @@
             this.column11.Name = "column11";
             this.column11.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // column6
-            // 
-            this.column6.HeaderText = "نوع الملف";
-            this.column6.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.column6.MinimumWidth = 6;
-            this.column6.Name = "column6";
-            this.column6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // UserName
             // 
             this.UserName.HeaderText = "المستخدم";
@@ -256,6 +246,20 @@
             this.toolTip1.AutoPopDelay = 5000;
             this.toolTip1.InitialDelay = 100;
             this.toolTip1.ReshowDelay = 20;
+            // 
+            // picContact
+            // 
+            this.picContact.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picContact.Image = ((System.Drawing.Image)(resources.GetObject("picContact.Image")));
+            this.picContact.Location = new System.Drawing.Point(14, 103);
+            this.picContact.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.picContact.Name = "picContact";
+            this.picContact.Size = new System.Drawing.Size(36, 29);
+            this.picContact.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picContact.TabIndex = 953;
+            this.picContact.TabStop = false;
+            this.toolTip1.SetToolTip(this.picContact, "الجهات");
+            this.picContact.Click += new System.EventHandler(this.picContact_Click);
             // 
             // notifyIcon1
             // 
@@ -279,6 +283,7 @@
             this.btnSearchRefresh.TabIndex = 971;
             this.btnSearchRefresh.Text = "تحديث";
             this.btnSearchRefresh.UseVisualStyleBackColor = false;
+            this.btnSearchRefresh.Click += new System.EventHandler(this.btnSearchRefresh_Click);
             // 
             // groupBox1
             // 
@@ -311,6 +316,17 @@
             this.lblFileExtension.TabIndex = 939;
             this.lblFileExtension.Text = "label10";
             // 
+            // picFileIcon
+            // 
+            this.picFileIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picFileIcon.Location = new System.Drawing.Point(313, 29);
+            this.picFileIcon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.picFileIcon.Name = "picFileIcon";
+            this.picFileIcon.Size = new System.Drawing.Size(34, 35);
+            this.picFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picFileIcon.TabIndex = 938;
+            this.picFileIcon.TabStop = false;
+            // 
             // btnFileCancel
             // 
             this.btnFileCancel.BackColor = System.Drawing.Color.White;
@@ -326,6 +342,7 @@
             this.btnFileCancel.TabIndex = 937;
             this.btnFileCancel.Text = "إلغاء";
             this.btnFileCancel.UseVisualStyleBackColor = false;
+            this.btnFileCancel.Click += new System.EventHandler(this.btnFileCancel_Click);
             // 
             // btnFileShow
             // 
@@ -342,6 +359,7 @@
             this.btnFileShow.TabIndex = 936;
             this.btnFileShow.Text = "عرض الملف";
             this.btnFileShow.UseVisualStyleBackColor = false;
+            this.btnFileShow.Click += new System.EventHandler(this.btnFileShow_Click);
             // 
             // btnFileSave
             // 
@@ -359,6 +377,7 @@
             this.btnFileSave.TabIndex = 935;
             this.btnFileSave.Text = "حفظ الملف";
             this.btnFileSave.UseVisualStyleBackColor = false;
+            this.btnFileSave.Click += new System.EventHandler(this.btnFileSave_Click);
             // 
             // btnFileBrowse
             // 
@@ -376,6 +395,7 @@
             this.btnFileBrowse.TabIndex = 934;
             this.btnFileBrowse.Text = "...";
             this.btnFileBrowse.UseVisualStyleBackColor = false;
+            this.btnFileBrowse.Click += new System.EventHandler(this.btnFileBrowse_Click);
             // 
             // label9
             // 
@@ -427,6 +447,7 @@
             this.btnSearch.TabIndex = 967;
             this.btnSearch.Text = "بحث";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // groupBox3
             // 
@@ -472,6 +493,7 @@
             this.cmbSearchYear.Name = "cmbSearchYear";
             this.cmbSearchYear.Size = new System.Drawing.Size(119, 29);
             this.cmbSearchYear.TabIndex = 943;
+            this.cmbSearchYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbSearchYear_KeyPress);
             // 
             // txtSearchNum
             // 
@@ -482,6 +504,7 @@
             this.txtSearchNum.Name = "txtSearchNum";
             this.txtSearchNum.Size = new System.Drawing.Size(119, 29);
             this.txtSearchNum.TabIndex = 941;
+            this.txtSearchNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchNum_KeyPress);
             // 
             // radSearchSubject
             // 
@@ -524,6 +547,7 @@
             this.radSearchNum.TabStop = true;
             this.radSearchNum.Text = "الرقم الإشاري";
             this.radSearchNum.UseVisualStyleBackColor = true;
+            this.radSearchNum.CheckedChanged += new System.EventHandler(this.radSearchNum_CheckedChanged);
             // 
             // grpInfo
             // 
@@ -576,6 +600,8 @@
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(241, 29);
             this.cmbYear.TabIndex = 961;
+            this.cmbYear.SelectedIndexChanged += new System.EventHandler(this.cmbYear_SelectedIndexChanged);
+            this.cmbYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbYear_KeyPress);
             // 
             // cmbContacts
             // 
@@ -711,6 +737,7 @@
             this.txtNum.Name = "txtNum";
             this.txtNum.Size = new System.Drawing.Size(185, 29);
             this.txtNum.TabIndex = 948;
+            this.txtNum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNum_KeyPress);
             // 
             // label1
             // 
@@ -730,89 +757,103 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.picRefresh);
-            this.panel1.Controls.Add(this.picDelete);
-            this.panel1.Controls.Add(this.picAdd);
-            this.panel1.Controls.Add(this.picUpdate);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnAddd);
+            this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.btnUpdate);
             this.panel1.Location = new System.Drawing.Point(5, 231);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(358, 80);
             this.panel1.TabIndex = 970;
             // 
-            // picFileIcon
+            // button1
             // 
-            this.picFileIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picFileIcon.Location = new System.Drawing.Point(313, 29);
-            this.picFileIcon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.picFileIcon.Name = "picFileIcon";
-            this.picFileIcon.Size = new System.Drawing.Size(34, 35);
-            this.picFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picFileIcon.TabIndex = 938;
-            this.picFileIcon.TabStop = false;
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Sakkal Majalla", 14.25F);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(269, 12);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 57);
+            this.button1.TabIndex = 977;
+            this.button1.Text = "اضافة";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // picContact
+            // btnAddd
             // 
-            this.picContact.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picContact.Image = ((System.Drawing.Image)(resources.GetObject("picContact.Image")));
-            this.picContact.Location = new System.Drawing.Point(14, 103);
-            this.picContact.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.picContact.Name = "picContact";
-            this.picContact.Size = new System.Drawing.Size(36, 29);
-            this.picContact.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picContact.TabIndex = 953;
-            this.picContact.TabStop = false;
-            this.toolTip1.SetToolTip(this.picContact, "الجهات");
+            this.btnAddd.BackColor = System.Drawing.Color.White;
+            this.btnAddd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddd.Font = new System.Drawing.Font("Sakkal Majalla", 14.25F);
+            this.btnAddd.ForeColor = System.Drawing.Color.Black;
+            this.btnAddd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddd.Location = new System.Drawing.Point(269, 12);
+            this.btnAddd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAddd.Name = "btnAddd";
+            this.btnAddd.Size = new System.Drawing.Size(64, 57);
+            this.btnAddd.TabIndex = 976;
+            this.btnAddd.Text = "اضافة";
+            this.btnAddd.UseVisualStyleBackColor = false;
+            this.btnAddd.Click += new System.EventHandler(this.btnAddd_Click);
             // 
-            // picRefresh
+            // btnRefresh
             // 
-            this.picRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picRefresh.Image = ((System.Drawing.Image)(resources.GetObject("picRefresh.Image")));
-            this.picRefresh.Location = new System.Drawing.Point(21, 12);
-            this.picRefresh.Name = "picRefresh";
-            this.picRefresh.Size = new System.Drawing.Size(63, 60);
-            this.picRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picRefresh.TabIndex = 950;
-            this.picRefresh.TabStop = false;
-            this.toolTip1.SetToolTip(this.picRefresh, "تحديث");
+            this.btnRefresh.BackColor = System.Drawing.Color.White;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Sakkal Majalla", 14.25F);
+            this.btnRefresh.ForeColor = System.Drawing.Color.Black;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefresh.Location = new System.Drawing.Point(17, 12);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(64, 57);
+            this.btnRefresh.TabIndex = 975;
+            this.btnRefresh.Text = "تحديث";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // picDelete
+            // btnDelete
             // 
-            this.picDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picDelete.Image = ((System.Drawing.Image)(resources.GetObject("picDelete.Image")));
-            this.picDelete.Location = new System.Drawing.Point(104, 12);
-            this.picDelete.Name = "picDelete";
-            this.picDelete.Size = new System.Drawing.Size(63, 60);
-            this.picDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picDelete.TabIndex = 951;
-            this.picDelete.TabStop = false;
-            this.toolTip1.SetToolTip(this.picDelete, "حذف");
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Sakkal Majalla", 14.25F);
+            this.btnDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(103, 12);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(64, 57);
+            this.btnDelete.TabIndex = 974;
+            this.btnDelete.Text = "حذف";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // picAdd
+            // btnUpdate
             // 
-            this.picAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picAdd.Image = ((System.Drawing.Image)(resources.GetObject("picAdd.Image")));
-            this.picAdd.Location = new System.Drawing.Point(270, 12);
-            this.picAdd.Name = "picAdd";
-            this.picAdd.Size = new System.Drawing.Size(63, 60);
-            this.picAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAdd.TabIndex = 952;
-            this.picAdd.TabStop = false;
-            this.toolTip1.SetToolTip(this.picAdd, "اضافة");
+            this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Font = new System.Drawing.Font("Sakkal Majalla", 14.25F);
+            this.btnUpdate.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpdate.Location = new System.Drawing.Point(180, 12);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(64, 57);
+            this.btnUpdate.TabIndex = 973;
+            this.btnUpdate.Text = "تعديل";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // picUpdate
-            // 
-            this.picUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picUpdate.Image = ((System.Drawing.Image)(resources.GetObject("picUpdate.Image")));
-            this.picUpdate.Location = new System.Drawing.Point(187, 12);
-            this.picUpdate.Name = "picUpdate";
-            this.picUpdate.Size = new System.Drawing.Size(63, 60);
-            this.picUpdate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUpdate.TabIndex = 949;
-            this.picUpdate.TabStop = false;
-            this.toolTip1.SetToolTip(this.picUpdate, "تعديل");
-            // 
-            // Outter
+            // FrmOutter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -825,11 +866,15 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grpInfo);
             this.Controls.Add(this.panel1);
-            this.Name = "Outter";
+            this.Name = "FrmOutter";
             this.Text = "Outter";
+            this.Load += new System.EventHandler(this.FrmOutter_Load);
+            this.Resize += new System.EventHandler(this.FrmOutter_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picContact)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFileIcon)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -837,12 +882,6 @@
             this.grpInfo.ResumeLayout(false);
             this.grpInfo.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picFileIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picContact)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDelete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picUpdate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -851,30 +890,15 @@
         #endregion
 
         internal System.Windows.Forms.ToolStripStatusLabel tssLblDateTime;
-        internal System.Windows.Forms.PictureBox picRefresh;
         internal System.Windows.Forms.ToolTip toolTip1;
         internal System.Windows.Forms.DataGridView dgvOutter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContactName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SendDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column11;
-        private System.Windows.Forms.DataGridViewImageColumn column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        internal System.Windows.Forms.PictureBox picDelete;
-        internal System.Windows.Forms.PictureBox picAdd;
         internal System.Windows.Forms.PictureBox picContact;
-        internal System.Windows.Forms.PictureBox picUpdate;
         internal System.Windows.Forms.OpenFileDialog ofd;
         internal System.Windows.Forms.NotifyIcon notifyIcon1;
         internal System.Windows.Forms.SaveFileDialog sfd;
         internal System.Windows.Forms.Button btnSearchRefresh;
         internal System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblFileExtension;
-        internal System.Windows.Forms.PictureBox picFileIcon;
         internal System.Windows.Forms.Button btnFileCancel;
         internal System.Windows.Forms.Button btnFileShow;
         internal System.Windows.Forms.Button btnFileSave;
@@ -906,5 +930,20 @@
         internal System.Windows.Forms.TextBox txtNum;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.PictureBox picFileIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContactName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SendDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RegDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
+        internal System.Windows.Forms.Button btnRefresh;
+        internal System.Windows.Forms.Button btnDelete;
+        internal System.Windows.Forms.Button btnUpdate;
+        internal System.Windows.Forms.Button btnAddd;
+        internal System.Windows.Forms.Button button1;
     }
 }

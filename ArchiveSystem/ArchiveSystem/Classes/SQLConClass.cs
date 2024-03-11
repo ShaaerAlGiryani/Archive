@@ -7,19 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace ArchiveSystem.Classes
 {
     internal class SQLConClass
     {
         public static string sqlQuery;
-
         SqlConnection con;
         public SQLConClass()
         {
             con = new SqlConnection("Data Source=" + Settings.Default.Server + ";Initial Catalog=" + Settings.Default.Database + ";Integrated Security=False;User ID=" + Settings.Default.SQLLogin + ";Password=" + Settings.Default.SQLPassword + ";");
         }
-
         public DataSet selectData(string command, int type, SqlParameter[] parameters)
         {
             SqlDataAdapter da;
@@ -65,7 +62,7 @@ namespace ArchiveSystem.Classes
             {
                 con.Open();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(ds);                  
+                da.Fill(ds);
                 con.Close();
 
                 VariablesClass.Save = Convert.ToInt32(cmd.Parameters["@saveState"].Value.ToString());
@@ -84,5 +81,3 @@ namespace ArchiveSystem.Classes
 
     }
 }
-    
-
