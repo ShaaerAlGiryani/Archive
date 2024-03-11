@@ -87,6 +87,15 @@ namespace ArchiveSystem.Forms
 
         }
 
-        
+        private void btnInner_Click(object sender, EventArgs e)
+        {
+            FrmInner frmInner = new FrmInner();
+            frmInner.ShowDialog();
+        }
+
+        private void btnSetings_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

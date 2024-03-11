@@ -24,14 +24,7 @@ namespace ArchiveSystem.Classes
         DataSet ds = new DataSet();
         DataSet dsChangePass = new DataSet();
         //insert user
-        public void setusername(string username)
-        {
-            userName = username;
-        }
-        public string getusername()
-        {
-            return userName;
-        }
+       
         public void insertUser(UserClass user)
         {
                 var sqlCon = new SQLConClass();

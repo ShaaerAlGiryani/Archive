@@ -31,3 +31,4 @@ C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.pdb
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmUsers.resources
 C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmContacts.resources
+C:\Users\HP\Desktop\Archive\ArchiveSystem\ArchiveSystem\obj\Debug\ArchiveSystem.Forms.FrmInner.resources

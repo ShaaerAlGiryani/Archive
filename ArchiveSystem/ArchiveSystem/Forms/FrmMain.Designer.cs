@@ -195,6 +195,7 @@
             this.btnSetings.Text = "إعدادت النظام";
             this.btnSetings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSetings.UseVisualStyleBackColor = true;
+            this.btnSetings.Click += new System.EventHandler(this.btnSetings_Click);
             // 
             // btnUsers
             // 
@@ -251,6 +252,7 @@
             this.btnInner.Text = "ارشفة البريد الوارد";
             this.btnInner.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnInner.UseVisualStyleBackColor = true;
+            this.btnInner.Click += new System.EventHandler(this.btnInner_Click);
             // 
             // picUser
             // 
